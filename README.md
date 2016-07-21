@@ -1,4 +1,4 @@
-# php_zip_manager
+# php_git_sync
 sync you'r git project with a web server :D
 
 
