@@ -1,5 +1,6 @@
 <?php
 include("config.php"); //laad config
+
 function download($url, $destination) {
     
     try {
