@@ -10,6 +10,7 @@ sync you'r git project with a web server :D
  
 # Config.php
 'REPO_ZIP_URL' is the url of the zip (master) file<br />
+'ENABLE_LOG' is to use log files or not, true = log, false = don't log (stay sassy)<br />
 'OUTPUTPATH' is the path to where the files will be dumped<br />
 'USERNAME' is the username to use for the download if you have a PRIVATE repo (using curl)<br />
 'PASSWORD' is the password to use for the download if you have a PRIVATE repo (using curl)<br />
