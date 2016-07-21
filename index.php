@@ -1,5 +1,5 @@
 <?php
-include("config.php"); //load config
+include("config.php"); //laad config
 function download($url, $destination) {
     try {
         $fp = fopen($destination, "w");
@@ -12,10 +12,10 @@ function download($url, $destination) {
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         $resp = curl_exec($ch);
-        // validate CURL status
+        // check CURL status
         if(curl_errno($ch))
             throw new Exception(curl_error($ch), 500);
-        // validate HTTP status code (user/password credential issues)
+        // check of de url geldig is
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($status_code != 200)
             throw new Exception("Response status code [" . $status_code . "].", 500);
@@ -54,12 +54,14 @@ function recursiveRemove($dir) {
 }
 recursiveRemove(OUTPUTPATH . "master");
 rename(OUTPUTPATH . $gitname , OUTPUTPATH . "master");
-$file = 'log/log.log';
-$current = file_get_contents($file);
-$current .= "[" . date("Y-m-d") . "  " . date("h:i:sa") . "] Update in online project git, deze update is nu online op de test server (door bot) met patch id: " . $gitname . "\n";
-file_put_contents($file, $current);
-$file = 'log/ver.log';
-$current = file_get_contents($file);
-$current = $gitname;
-file_put_contents($file, $current);
+if (ENABLE_LOG == 'true') {
+    $file = 'log/log.log';
+    $current = file_get_contents($file);
+    $current .= "[" . date("Y-m-d") . "  " . date("h:i:sa") . "] Update in online project git, deze update is nu online op de test server (door bot) met patch id: " . $gitname . "\n";
+    file_put_contents($file, $current);
+    $file = 'log/ver.log';
+    $current = file_get_contents($file);
+    $current = $gitname;
+    file_put_contents($file, $current);
+}
 ?>
